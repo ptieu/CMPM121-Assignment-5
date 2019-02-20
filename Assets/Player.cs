@@ -24,7 +24,9 @@ public class Player : MonoBehaviour
     public bool OpenDoor1 = false;
     public bool OpenDoor2 = false;
 
-    Animator m_Animator;
+    private Animator m_Animator;
+
+    public ParticleSystem keyFX;
 
 
     void Start()
@@ -73,6 +75,7 @@ public class Player : MonoBehaviour
         if(enter)
         {
           collected += 1;
+          Instantiate(keyFX, other.transform.position, Quaternion.identity);
           Destroy(other.transform.root.gameObject);
         }
       }
@@ -88,7 +91,7 @@ public class Player : MonoBehaviour
       if(other.gameObject.CompareTag("Door2")) // Opens the door if 5 or more keys are collected
           {
             m_Animator = other.transform.root.gameObject.GetComponent<Animator>();
-            if(collected >= 5)    {  m_Animator.SetBool("OpenDoor2", true);}
+            if(collected >= 4)    {  m_Animator.SetBool("OpenDoor2", true);}
 
 
 
