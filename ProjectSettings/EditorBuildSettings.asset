@@ -11,9 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/TitleScreen.unity
     guid: 3df7c09caf8f4fc46ad014878908969e
-  - enabled: 1
-    path: Assets/PlayScene.unity
-    guid: e4ab376d772aa664fb41338e90c5f32c
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Assignment5.unity
     guid: b02388cd02d76504380e8000d884f79e

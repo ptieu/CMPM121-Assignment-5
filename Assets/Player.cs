@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     public bool OpenDoor2 = false;
 
     private Animator m_Animator;
+    private Animator m_PlayerAnim;
 
     public ParticleSystem keyFX;
 
@@ -32,6 +33,7 @@ public class Player : MonoBehaviour
     void Start()
     {
       controller = GetComponent<CharacterController>();
+      m_PlayerAnim = gameObject.GetComponent<Animator>();
 
 
       gameObject.transform.position = new Vector3(0, 5, 0);
@@ -44,11 +46,12 @@ public class Player : MonoBehaviour
           moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
           moveDirection = transform.TransformDirection(moveDirection);
           moveDirection = moveDirection * speed;
-
+          m_PlayerAnim.SetBool("Jumping", false);
           if (Input.GetButton("Jump"))
-         {
-             moveDirection.y = jumpSpeed;
-         }
+            {
+              m_PlayerAnim.SetBool("Jumping", true);
+              moveDirection.y = jumpSpeed;
+            }
         }
 
         // Apply gravity
@@ -56,6 +59,14 @@ public class Player : MonoBehaviour
 
         // Move the controller
         controller.Move(moveDirection * Time.deltaTime);
+
+
+
+        // Plays running animation when character is moving in x or z axis
+        if(moveDirection.x > 0.0f || moveDirection.z > 0.0f)
+        {
+          m_PlayerAnim.SetBool("Running", true);
+        } else { m_PlayerAnim.SetBool("Running", false); }
 
         // Rotate the view
         rotationY = Input.GetAxis("Mouse X");

@@ -15,7 +15,7 @@ public class EndGame : MonoBehaviour
 
     void Update()
     {
-      if(Keys.collected == 10)
+      if(Keys.collected == 6)
       {
         MainMenuScene("TitleScreen");
       }
